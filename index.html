@@ -2,37 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>AI Assistant</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
+    <!-- Load after DOM so listeners always attach -->
+    <script src="./script.js" defer></script>
   </head>
-<body>
-  <!-- Floating Chat Button -->
-  <div id="chatButton" class="chat-button">
-    💬
-  </div>
+  <body>
+    <!-- Floating Chat Button -->
+    <button id="chatButton" class="chat-button" aria-label="Open chat">💬</button>
 
-  <!-- Chat Window -->
-  <div id="chatWidget" class="chat-container">
-    <div class="chat-header">
-      <div class="avatar">
-        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Bot">
+    <!-- Chat Window -->
+    <div id="chatWidget" class="chat-container">
+      <div class="chat-header">
+        <div class="avatar">
+          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Bot" />
+        </div>
+        <h1>AI Assistant</h1>
+        <button id="closeChat" class="close-btn" aria-label="Close chat">×</button>
       </div>
-      <h1>AI Assistant</h1>
-      <button id="closeChat" class="close-btn">×</button>
+
+      <div id="chatBody" class="chat-body"></div>
+
+      <div class="chat-input-area">
+        <input id="chatInput" type="text" placeholder="Type your message..." />
+        <button id="sendBtn">Send</button>
+      </div>
     </div>
-
-    <div class="chat-body" id="chatBody"></div>
-
-    <div class="chat-input-area">
-      <input id="chatInput" type="text" placeholder="Type your message..." />
-      <button id="sendBtn">Send</button>
-    </div>
-  </div>
-
-  <script src="./script.js"></script>
-</body>
-
+  </body>
 </html>
