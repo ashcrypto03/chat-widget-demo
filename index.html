@@ -8,25 +8,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
-    <div class="chat-container">
-      <div class="chat-header">
-        <div class="avatar">
-          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Bot">
-        </div>
-        <h1>AI Assistant</h1>
-      </div>
+<body>
+  <!-- Floating Chat Button -->
+  <div id="chatButton" class="chat-button">
+    💬
+  </div>
 
-      <div class="chat-body" id="chatBody"></div>
-
-      <div class="chat-input-area">
-        <input id="chatInput" type="text" placeholder="Type your message..." />
-        <button id="sendBtn">Send</button>
+  <!-- Chat Window -->
+  <div id="chatWidget" class="chat-container hidden">
+    <div class="chat-header">
+      <div class="avatar">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Bot">
       </div>
+      <h1>AI Assistant</h1>
+      <button id="closeChat" class="close-btn">×</button>
     </div>
 
-    <!-- Optional: sanitize replies if you ever render HTML -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script> -->
-    <script src="./script.js"></script>
-  </body>
+    <div class="chat-body" id="chatBody"></div>
+
+    <div class="chat-input-area">
+      <input id="chatInput" type="text" placeholder="Type your message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+
 </html>
