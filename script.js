@@ -16,19 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Toggle chat open/close ---
   chatButton.addEventListener("click", () => {
-    console.log("[chat] toggle open");
     chatWidget.classList.toggle("active");
   });
 
   closeChat?.addEventListener("click", () => {
-    console.log("[chat] close");
     chatWidget.classList.remove("active");
   });
 
-  // --- Demo messages ---
+  // --- Chat message avatars ---
   const BOT = "https://cdn-icons-png.flaticon.com/512/4712/4712109.png";
   const USER = "https://cdn-icons-png.flaticon.com/512/4712/4712102.png";
 
+  // --- Add message bubble ---
   function addMessage(text, who = "bot") {
     const row = document.createElement("div");
     row.className = `message-row ${who}`;
@@ -40,47 +39,43 @@ document.addEventListener("DOMContentLoaded", () => {
     chatBody.scrollTop = chatBody.scrollHeight;
   }
 
-  function sendMessage() {
+  // --- Send message to webhook ---
+  const WEBHOOK_URL = "https://g2u89k0h.rpcl.dev/webhook/chat"; // your n8n webhook URL
+
+  async function sendMessage() {
     const text = chatInput.value.trim();
     if (!text) return;
+
     addMessage(text, "user");
     chatInput.value = "";
-    // --- Webhook call to n8n ---
-const WEBHOOK_URL = "https://g2u89k0h.rpcl.dev/webhook/chat"; // <-- paste your n8n webhook URL
 
-async function sendMessage() {
-  const text = chatInput.value.trim();
-  if (!text) return;
-  addMessage(text, "user");
-  chatInput.value = "";
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chatInput: text }), // match your n8n field name
+      });
 
-  try {
-    const res = await fetch(WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chatInput: text }), // match the variable name expected by your n8n webhook
-    });
+      if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+      const data = await res.json();
 
-    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-    const data = await res.json();
+      // Extract reply text from webhook response
+      let reply = data.reply || "⚠️ No reply received from AI.";
+      reply = reply.replace(/\n/g, "<br>"); // convert line breaks
 
-    // Handle reply text from n8n
-    let reply = data.reply || "⚠️ No reply received.";
-    reply = reply.replace(/\n/g, "<br>"); // handle new lines
-
-    addMessage(reply, "bot");
-  } catch (err) {
-    console.error("Webhook error:", err);
-    addMessage("⚠️ Unable to reach server.", "bot");
-  }
-}
-
+      addMessage(reply, "bot");
+    } catch (err) {
+      console.error("Webhook error:", err);
+      addMessage("⚠️ Unable to reach n8n webhook server.", "bot");
+    }
   }
 
+  // --- Event listeners ---
   sendBtn?.addEventListener("click", sendMessage);
-  chatInput?.addEventListener("keydown", e => {
+  chatInput?.addEventListener("keydown", (e) => {
     if (e.key === "Enter") sendMessage();
   });
 
+  // --- Greeting message ---
   addMessage("Hi! Click the green bubble to open/close me 🤖");
 });
