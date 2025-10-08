@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addMessage(text, "user");
     chatInput.value = "";
     // --- Webhook call to n8n ---
-const WEBHOOK_URL = "https://YOUR_N8N_WEBHOOK_URL_HERE"; // <-- paste your n8n webhook URL
+const WEBHOOK_URL = "https://g2u89k0h.rpcl.dev/webhook/chat"; // <-- paste your n8n webhook URL
 
 async function sendMessage() {
   const text = chatInput.value.trim();
