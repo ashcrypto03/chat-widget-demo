@@ -150,13 +150,15 @@
   });
 
   // --- Message logic ---
-  const appendMessage = (text, sender = "bot") => {
-    const msg = document.createElement("div");
-    msg.className = `msg ${sender}`;
-    msg.textContent = text;
-    messages.appendChild(msg);
-    messages.scrollTop = messages.scrollHeight;
-  };
+const appendMessage = (text, sender = "bot") => {
+  const msg = document.createElement("div");
+  msg.className = `msg ${sender}`;
+  // Allow line breaks and <br> tags from the backend
+  msg.innerHTML = text;
+  messages.appendChild(msg);
+  messages.scrollTop = messages.scrollHeight;
+};
+
 
   appendMessage(CFG.welcome, "bot");
 
