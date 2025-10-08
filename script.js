@@ -63,7 +63,7 @@ async function sendMessage() {
 
   try {
     // Replace with your actual webhook URL
-    const response = await fetch("https://your-n8n-webhook-url/webhook/chat", {
+    const response = await fetch("https://g2u89k0h.rpcl.dev/webhook/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message }),
