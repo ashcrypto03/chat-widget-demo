@@ -9,7 +9,7 @@ const userInput = document.getElementById("userInput");
 const chatBody = document.getElementById("chatBody");
 
 // 🌐 Replace with your actual n8n webhook URL
-const WEBHOOK_URL = "https://YOUR-WEBHOOK-URL-HERE/webhook/chat";
+const WEBHOOK_URL = "https://g2u89k0h.rpcl.dev/webhook/chat";
 
 // === TOGGLE CHAT ===
 chatButton.addEventListener("click", () => {
@@ -40,7 +40,7 @@ async function sendMessage() {
 
   try {
     // Send message to n8n webhook
-    const response = await fetch(https://g2u89k0h.rpcl.dev/webhook/chat, {
+    const response = await fetch("https://g2u89k0h.rpcl.dev/webhook/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message }), // ✅ matches your n8n “message” field
