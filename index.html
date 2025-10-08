@@ -1,49 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Somnex AI Agent</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
-
-  <!-- 🌐 Floating Chat Button -->
-  <div id="chatButton">
-    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Chat Icon">
-  </div>
-
-  <!-- 💬 Chat Widget -->
-  <div id="chatWidget">
-    <!-- Header -->
-    <div class="chat-header">
-      <div class="chat-header-title">
-        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Bot Icon" />
-        <span>Somnex AI Agent</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Somnex AI Agent</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="chat-container" id="chatContainer">
+      <div class="chat-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" alt="AI" />
+        <h2>Somnex AI Agent</h2>
+        <button id="closeChat">×</button>
       </div>
-      <button id="closeChat">&times;</button>
-    </div>
 
-    <!-- Chat Messages -->
-    <div id="chatBody">
-      <div class="message-row bot">
-        <div class="avatar-small">
-          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Bot Avatar">
+      <div class="chat-box" id="chatBox">
+        <div class="bot-message">
+          <div class="avatar bot-avatar">🤖</div>
+          <div class="message">Hi! Ask me anything 💬</div>
         </div>
-        <div class="message bot">Hi! Click the green bubble to open/close me 🤖</div>
       </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="chat-footer">
-      <div class="input-container">
+      <div class="chat-input">
         <input type="text" id="userInput" placeholder="Type your message..." />
         <button id="sendButton">Send</button>
       </div>
     </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
+    <button class="chat-toggle" id="chatToggle">💬</button>
+
+    <script src="script.js"></script>
+  </body>
 </html>
