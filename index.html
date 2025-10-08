@@ -1,33 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>AI Assistant</title>
-    <link rel="stylesheet" href="./style.css" />
-    <!-- Load after DOM so listeners always attach -->
-    <script src="./script.js" defer></script>
-  </head>
-  <body>
-    <!-- Floating Chat Button -->
-    <button id="chatButton" class="chat-button" aria-label="Open chat">💬</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Somnex AI Agent</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
 
-    <!-- Chat Window -->
-    <div id="chatWidget" class="chat-container">
-      <div class="chat-header">
-        <div class="avatar">
-          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Bot" />
-        </div>
-        <h1>Somnex AI Agent</h1>
-        <button id="closeChat" class="close-btn" aria-label="Close chat">×</button>
+  <!-- 🌐 Floating Chat Button -->
+  <div id="chatButton">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Chat Icon">
+  </div>
+
+  <!-- 💬 Chat Widget -->
+  <div id="chatWidget">
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="chat-header-title">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Bot Icon" />
+        <span>Somnex AI Agent</span>
       </div>
+      <button id="closeChat">&times;</button>
+    </div>
 
-      <div id="chatBody" class="chat-body"></div>
-
-      <div class="chat-input-area">
-        <input id="chatInput" type="text" placeholder="Type your message..." />
-        <button id="sendBtn">Send</button>
+    <!-- Chat Messages -->
+    <div id="chatBody">
+      <div class="message-row bot">
+        <div class="avatar-small">
+          <img src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png" alt="Bot Avatar">
+        </div>
+        <div class="message bot">Hi! Click the green bubble to open/close me 🤖</div>
       </div>
     </div>
-  </body>
+
+    <!-- Footer -->
+    <div class="chat-footer">
+      <div class="input-container">
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button id="sendButton">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
