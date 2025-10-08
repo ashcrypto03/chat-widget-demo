@@ -45,7 +45,36 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!text) return;
     addMessage(text, "user");
     chatInput.value = "";
-    setTimeout(() => addMessage("This is a demo reply 🎉", "bot"), 400);
+    // --- Webhook call to n8n ---
+const WEBHOOK_URL = "https://YOUR_N8N_WEBHOOK_URL_HERE"; // <-- paste your n8n webhook URL
+
+async function sendMessage() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+  addMessage(text, "user");
+  chatInput.value = "";
+
+  try {
+    const res = await fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chatInput: text }), // match the variable name expected by your n8n webhook
+    });
+
+    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+    const data = await res.json();
+
+    // Handle reply text from n8n
+    let reply = data.reply || "⚠️ No reply received.";
+    reply = reply.replace(/\n/g, "<br>"); // handle new lines
+
+    addMessage(reply, "bot");
+  } catch (err) {
+    console.error("Webhook error:", err);
+    addMessage("⚠️ Unable to reach server.", "bot");
+  }
+}
+
   }
 
   sendBtn?.addEventListener("click", sendMessage);
