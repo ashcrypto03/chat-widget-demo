@@ -5,22 +5,24 @@ const sendButton = document.getElementById("sendButton");
 const userInput = document.getElementById("userInput");
 const chatBox = document.getElementById("chatBox");
 
-// Toggle chat visibility
+// === TOGGLE CHAT ===
 chatToggle.addEventListener("click", () => {
-  chatContainer.style.display =
-    chatContainer.style.display === "flex" ? "none" : "flex";
+  const isVisible = chatContainer.style.display === "flex";
+  chatContainer.style.display = isVisible ? "none" : "flex";
+  chatToggle.style.display = isVisible ? "block" : "none"; // Hide toggle when open
 });
 
 closeChat.addEventListener("click", () => {
   chatContainer.style.display = "none";
+  chatToggle.style.display = "block"; // Show toggle again when closed
 });
 
-// Sanitize output
+// === SANITIZE TEXT ===
 function cleanText(text) {
   return text.replace(/\*\*/g, "").replace(/#/g, "").replace(/\*/g, "");
 }
 
-// Add message to chat box
+// === ADD MESSAGE TO CHAT ===
 function addMessage(content, sender) {
   const messageWrapper = document.createElement("div");
   messageWrapper.classList.add(sender === "user" ? "user-message" : "bot-message");
@@ -39,7 +41,7 @@ function addMessage(content, sender) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// Typing indicator
+// === TYPING INDICATOR ===
 function showTyping() {
   const typing = document.createElement("div");
   typing.classList.add("typing");
@@ -49,7 +51,7 @@ function showTyping() {
   return typing;
 }
 
-// Send message
+// === SEND MESSAGE ===
 async function sendMessage() {
   const message = userInput.value.trim();
   if (message === "") return;
@@ -60,6 +62,7 @@ async function sendMessage() {
   const typing = showTyping();
 
   try {
+    // Replace with your actual webhook URL
     const response = await fetch("https://your-n8n-webhook-url/webhook/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -75,6 +78,7 @@ async function sendMessage() {
   }
 }
 
+// === EVENT LISTENERS ===
 sendButton.addEventListener("click", sendMessage);
 userInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") sendMessage();
